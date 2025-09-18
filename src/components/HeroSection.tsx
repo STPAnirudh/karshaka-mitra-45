@@ -47,10 +47,6 @@ const HeroSection = ({ onStartJourney }: HeroSectionProps = {}) => {
               Start Your Farm Journey
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            <Button variant="earth" size="xl">
-              <Leaf className="h-5 w-5" />
-              Explore Features
-            </Button>
           </div>
 
           {/* Feature Highlights */}

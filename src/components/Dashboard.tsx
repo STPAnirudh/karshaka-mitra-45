@@ -15,7 +15,8 @@ import {
   Camera,
   MessageCircle,
   Activity,
-  Zap
+  Zap,
+  Info
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import WeatherService, { WeatherData } from "@/services/WeatherService";
@@ -75,15 +76,23 @@ const Dashboard = ({ onTabChange }: DashboardProps = {}) => {
     <section className="py-16 bg-gradient-to-br from-background to-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-hero bg-clip-text text-transparent">
-            Your Farm Dashboard
-          </h2>
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <h2 className="text-3xl md:text-4xl font-bold bg-gradient-hero bg-clip-text text-transparent">
+              Your Farm Dashboard
+            </h2>
+            <button 
+              onClick={() => onTabChange?.("ai-assistant")}
+              className="p-2 rounded-full bg-primary/10 hover:bg-primary/20 transition-smooth"
+            >
+              <Info className="h-5 w-5 text-primary" />
+            </button>
+          </div>
           <p className="text-muted-foreground max-w-2xl mx-auto">
             Monitor your crops, track weather patterns, and get AI-powered recommendations for optimal farming decisions.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           {/* Weather Card */}
           <Card className="shadow-farm hover:shadow-glow transition-smooth border-l-4 border-l-monsoon">
             <CardHeader className="pb-3">
@@ -187,22 +196,41 @@ const Dashboard = ({ onTabChange }: DashboardProps = {}) => {
               <CardDescription>Field monitoring</CardDescription>
             </CardHeader>
             <CardContent className="space-y-3">
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Rice Field A</span>
-                <CheckCircle className="h-4 w-4 text-success" />
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Coconut Grove</span>
-                <CheckCircle className="h-4 w-4 text-success" />
-              </div>
-              <div className="flex items-center justify-between">
-                <span className="text-sm">Spice Garden</span>
-                <AlertTriangle className="h-4 w-4 text-warning" />
-              </div>
-              <Button variant="farm" size="sm" className="w-full" onClick={() => onTabChange?.("disease")}>
-                <Camera className="h-4 w-4" />
-                Scan Crop
-              </Button>
+              {(() => {
+                const treatments = [
+                  "Apply bio-fertilizer for healthy growth",
+                  "Use organic neem spray for pest prevention",
+                  "Implement drip irrigation system",
+                  "Apply potash fertilizer for better yield",
+                  "Use copper fungicide for disease control"
+                ];
+                const preventions = [
+                  "Monitor soil moisture levels daily", 
+                  "Remove infected plant debris immediately",
+                  "Rotate crops every season",
+                  "Maintain proper plant spacing",
+                  "Use disease-resistant varieties"
+                ];
+                const randomTreatment = treatments[Math.floor(Math.random() * treatments.length)];
+                const randomPrevention = preventions[Math.floor(Math.random() * preventions.length)];
+                
+                return (
+                  <>
+                    <div className="flex items-center justify-between">
+                      <span className="text-sm">Rice Field A</span>
+                      <CheckCircle className="h-4 w-4 text-success" />
+                    </div>
+                    <div className="text-xs bg-primary/5 p-2 rounded">
+                      <p className="font-medium">Treatment: {randomTreatment}</p>
+                      <p className="text-muted-foreground mt-1">Prevention: {randomPrevention}</p>
+                    </div>
+                    <Button variant="farm" size="sm" className="w-full" onClick={() => onTabChange?.("disease")}>
+                      <Camera className="h-4 w-4" />
+                      Scan Crop
+                    </Button>
+                  </>
+                );
+              })()}
             </CardContent>
           </Card>
 
@@ -230,35 +258,6 @@ const Dashboard = ({ onTabChange }: DashboardProps = {}) => {
             </CardContent>
           </Card>
 
-          {/* Calendar */}
-          <Card className="shadow-farm hover:shadow-glow transition-smooth border-l-4 border-l-accent">
-            <CardHeader className="pb-3">
-              <CardTitle className="flex items-center gap-2">
-                <Calendar className="h-5 w-5 text-accent-foreground" />
-                Farm Calendar
-              </CardTitle>
-              <CardDescription>Upcoming tasks</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-3">
-              <div className="flex items-start gap-2">
-                <div className="w-2 h-2 rounded-full bg-success mt-2"></div>
-                <div>
-                  <p className="text-sm font-medium">Rice Harvesting</p>
-                  <p className="text-xs text-muted-foreground">Tomorrow, 6:00 AM</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-2">
-                <div className="w-2 h-2 rounded-full bg-warning mt-2"></div>
-                <div>
-                  <p className="text-sm font-medium">Pest Inspection</p>
-                  <p className="text-xs text-muted-foreground">Friday, 10:00 AM</p>
-                </div>
-              </div>
-              <Button variant="earth" size="sm" className="w-full">
-                View Full Calendar
-              </Button>
-            </CardContent>
-          </Card>
 
           {/* Pest Alert */}
           <Card className="shadow-farm hover:shadow-glow transition-smooth border-l-4 border-l-destructive">

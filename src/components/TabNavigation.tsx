@@ -13,7 +13,7 @@ import {
 import { Button } from "@/components/ui/enhanced-button";
 import { cn } from "@/lib/utils";
 
-export type TabType = "dashboard" | "crops" | "disease" | "weather" | "market" | "profile" | "ai-assistant" | "alerts";
+export type TabType = "dashboard" | "crops" | "disease" | "weather" | "market" | "profile" | "ai-assistant" | "alerts" | "ipm-pest-care" | "market-settings";
 
 interface TabNavigationProps {
   activeTab: TabType;

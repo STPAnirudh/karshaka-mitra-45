@@ -11,11 +11,15 @@ import {
   CloudRain, 
   TrendingUp,
   Lightbulb,
-  MessageSquare
+  MessageSquare,
+  Camera,
+  ArrowRight
 } from "lucide-react";
+import { TabType } from "@/components/TabNavigation";
 
 interface AIAssistantProps {
   language: "en" | "ml";
+  onTabChange?: (tab: TabType) => void;
 }
 
 interface Message {
@@ -25,7 +29,7 @@ interface Message {
   timestamp: Date;
 }
 
-const AIAssistant = ({ language }: AIAssistantProps) => {
+const AIAssistant = ({ language, onTabChange }: AIAssistantProps) => {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputMessage, setInputMessage] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -155,6 +159,37 @@ const AIAssistant = ({ language }: AIAssistantProps) => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* IPM Pest Care Image */}
+        <Card className="shadow-farm border-l-4 border-l-warning">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Bug className="h-5 w-5 text-warning" />
+              IPM Pest Care System
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div 
+              className="relative group cursor-pointer rounded-lg overflow-hidden border-2 border-dashed border-warning/30 hover:border-warning transition-smooth"
+              onClick={() => onTabChange?.("weather")}
+            >
+              <div className="aspect-video bg-gradient-to-br from-warning/10 to-success/10 flex items-center justify-center">
+                <div className="text-center p-4">
+                  <Camera className="h-12 w-12 mx-auto text-warning mb-2" />
+                  <p className="text-sm font-medium text-foreground">Click to link with Weather Forecast</p>
+                  <p className="text-xs text-muted-foreground mt-1">
+                    {(() => {
+                      const pests = ["Brown Plant Hopper", "Stem Borer", "Leaf Folder", "Thrips"];
+                      return `Random Pest: ${pests[Math.floor(Math.random() * pests.length)]}`;
+                    })()}
+                  </p>
+                </div>
+              </div>
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-all flex items-center justify-center">
+                <ArrowRight className="h-6 w-6 text-warning opacity-0 group-hover:opacity-100 transition-opacity" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
         {/* Quick Questions */}
         <Card className="shadow-farm">
           <CardHeader>

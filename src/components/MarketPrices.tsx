@@ -416,9 +416,14 @@ const MarketPrices = ({ language }: MarketPricesProps) => {
 
         <Card className="shadow-farm border-l-4 border-l-destructive">
           <CardContent className="p-4">
-            <div className="flex items-center gap-2 mb-2">
-              <TrendingDown className="h-5 w-5 text-destructive" />
-              <h3 className="font-medium text-destructive">{t.priceDown}</h3>
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 mb-2">
+                <TrendingDown className="h-5 w-5 text-destructive" />
+                <h3 className="font-medium text-destructive">{t.priceDown}</h3>
+              </div>
+              <Button variant="outline" size="sm" onClick={() => window.open('#market-settings', '_self')}>
+                Set Price Alert
+              </Button>
             </div>
             <p className="text-sm text-muted-foreground">
               {language === "en" 

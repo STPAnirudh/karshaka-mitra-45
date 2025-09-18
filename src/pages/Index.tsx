@@ -73,7 +73,7 @@ const Index = () => {
       case "profile":
         return <FarmerProfile language={language} />;
       case "ai-assistant":
-        return <AIAssistant language={language} />;
+        return <AIAssistant language={language} onTabChange={setActiveTab} />;
       case "alerts":
         return <PestAlerts language={language} />;
       default:

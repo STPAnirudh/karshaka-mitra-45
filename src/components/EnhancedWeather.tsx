@@ -346,10 +346,15 @@ const EnhancedWeather = ({ language }: EnhancedWeatherProps) => {
         {/* Today's Recommendations */}
         <Card className="shadow-farm border-l-4 border-l-success">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5 text-success" />
-              {t.recommendation}
-            </CardTitle>
+            <div className="flex items-center justify-between">
+              <CardTitle className="flex items-center gap-2">
+                <TrendingUp className="h-5 w-5 text-success" />
+                {t.recommendation}
+              </CardTitle>
+              <Button variant="outline" size="sm" onClick={() => window.open('#pest-control', '_self')}>
+                Pest Control
+              </Button>
+            </div>
           </CardHeader>
           <CardContent className="space-y-3">
             {recommendations.map((rec, index) => {
