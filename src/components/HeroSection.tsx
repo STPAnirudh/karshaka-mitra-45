@@ -2,7 +2,11 @@ import { Button } from "@/components/ui/enhanced-button";
 import { ArrowRight, Bot, Leaf, CloudRain } from "lucide-react";
 import heroImage from "@/assets/kerala-farming-hero.jpg";
 
-const HeroSection = () => {
+interface HeroSectionProps {
+  onStartJourney?: () => void;
+}
+
+const HeroSection = ({ onStartJourney }: HeroSectionProps = {}) => {
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image */}
@@ -39,7 +43,7 @@ const HeroSection = () => {
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
-            <Button variant="hero" size="xl" className="group">
+            <Button variant="hero" size="xl" className="group" onClick={onStartJourney}>
               Start Your Farm Journey
               <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
             </Button>

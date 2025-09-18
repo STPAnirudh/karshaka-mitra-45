@@ -7,13 +7,13 @@ import {
   TrendingUp,
   Stethoscope,
   User,
-  Bell,
+  Bot,
   AlertTriangle
 } from "lucide-react";
 import { Button } from "@/components/ui/enhanced-button";
 import { cn } from "@/lib/utils";
 
-export type TabType = "dashboard" | "crops" | "disease" | "weather" | "market" | "profile" | "notifications" | "alerts";
+export type TabType = "dashboard" | "crops" | "disease" | "weather" | "market" | "profile" | "ai-assistant" | "alerts";
 
 interface TabNavigationProps {
   activeTab: TabType;
@@ -54,9 +54,9 @@ const TabNavigation = ({ activeTab, onTabChange, language }: TabNavigationProps)
       icon: User,
     },
     {
-      id: "notifications" as TabType,
-      label: language === "en" ? "Notifications" : "നോട്ടിഫിക്കേഷനുകൾ",
-      icon: Bell,
+      id: "ai-assistant" as TabType,
+      label: language === "en" ? "AI Assistant" : "AI സഹായി",
+      icon: Bot,
     },
     {
       id: "alerts" as TabType,

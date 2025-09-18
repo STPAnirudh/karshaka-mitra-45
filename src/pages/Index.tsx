@@ -9,7 +9,7 @@ import EnhancedWeather from "@/components/EnhancedWeather";
 import MarketPrices from "@/components/MarketPrices";
 import BilingualChatbot from "@/components/BilingualChatbot";
 import FarmerProfile from "@/components/FarmerProfile";
-import PushNotificationSetup from "@/components/PushNotificationSetup";
+import AIAssistant from "@/components/AIAssistant";
 import PestAlerts from "@/components/PestAlerts";
 import Footer from "@/components/Footer";
 
@@ -61,7 +61,7 @@ const Index = () => {
   const renderTabContent = () => {
     switch (activeTab) {
       case "dashboard":
-        return <Dashboard />;
+        return <Dashboard onTabChange={setActiveTab} />;
       case "crops":
         return <CropRecommendation language={language} />;
       case "disease":
@@ -72,12 +72,12 @@ const Index = () => {
         return <MarketPrices language={language} />;
       case "profile":
         return <FarmerProfile language={language} />;
-      case "notifications":
-        return <PushNotificationSetup language={language} />;
+      case "ai-assistant":
+        return <AIAssistant language={language} />;
       case "alerts":
         return <PestAlerts language={language} />;
       default:
-        return <Dashboard />;
+        return <Dashboard onTabChange={setActiveTab} />;
     }
   };
 
@@ -85,7 +85,7 @@ const Index = () => {
     <div className="min-h-screen bg-background flex flex-col">
       <Header language={language} onLanguageToggle={toggleLanguage} />
       
-      {activeTab === "dashboard" && <HeroSection />}
+      {activeTab === "dashboard" && <HeroSection onStartJourney={() => setActiveTab("dashboard")} />}
       
       <TabNavigation 
         activeTab={activeTab} 
@@ -97,12 +97,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           {renderTabContent()}
           
-          {/* Chatbot - Always available */}
-          {activeTab !== "dashboard" && (
-            <div className="mt-12">
-              <BilingualChatbot language={language} />
-            </div>
-          )}
+          {/* Chatbot removed from other pages */}
         </div>
       </main>
 

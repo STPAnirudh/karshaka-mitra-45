@@ -21,8 +21,13 @@ import { useState, useEffect } from "react";
 import WeatherService, { WeatherData } from "@/services/WeatherService";
 import MarketService, { MarketPrice } from "@/services/MarketService";
 import SmartFarmingService, { PestAlert } from "@/services/SmartFarmingService";
+import { TabType } from "@/components/TabNavigation";
 
-const Dashboard = () => {
+interface DashboardProps {
+  onTabChange?: (tab: TabType) => void;
+}
+
+const Dashboard = ({ onTabChange }: DashboardProps = {}) => {
   const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
   const [marketPrices, setMarketPrices] = useState<MarketPrice[]>([]);
   const [pestAlerts, setPestAlerts] = useState<PestAlert[]>([]);
@@ -125,7 +130,7 @@ const Dashboard = () => {
               ) : (
                 <div className="text-center text-muted-foreground">Weather data unavailable</div>
               )}
-              <Button variant="weather" size="sm" className="w-full">
+              <Button variant="weather" size="sm" className="w-full" onClick={() => onTabChange?.("weather")}>
                 7-Day Forecast
               </Button>
             </CardContent>
@@ -166,7 +171,7 @@ const Dashboard = () => {
               ) : (
                 <div className="text-center text-muted-foreground">Price data unavailable</div>
               )}
-              <Button variant="market" size="sm" className="w-full">
+              <Button variant="market" size="sm" className="w-full" onClick={() => onTabChange?.("market")}>
                 View All Prices
               </Button>
             </CardContent>
@@ -194,7 +199,7 @@ const Dashboard = () => {
                 <span className="text-sm">Spice Garden</span>
                 <AlertTriangle className="h-4 w-4 text-warning" />
               </div>
-              <Button variant="farm" size="sm" className="w-full">
+              <Button variant="farm" size="sm" className="w-full" onClick={() => onTabChange?.("disease")}>
                 <Camera className="h-4 w-4" />
                 Scan Crop
               </Button>
@@ -219,7 +224,7 @@ const Dashboard = () => {
                   </p>
                 </div>
               </div>
-              <Button variant="hero" size="sm" className="w-full">
+              <Button variant="hero" size="sm" className="w-full" onClick={() => onTabChange?.("ai-assistant")}>
                 Chat with AI
               </Button>
             </CardContent>
@@ -292,7 +297,7 @@ const Dashboard = () => {
                   </p>
                 </div>
               )}
-              <Button variant="destructive" size="sm" className="w-full">
+              <Button variant="destructive" size="sm" className="w-full" onClick={() => onTabChange?.("alerts")}>
                 View Treatment
               </Button>
             </CardContent>
